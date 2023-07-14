@@ -22,7 +22,18 @@ export class UserService {
   }
 
   findAll() {
-    return this.userRepository.find();
+    return this.userRepository.query(
+      `SELECT
+        u.username,
+        ARRAY_AGG(jsonb_build_object('id', 'name', 'description', r.id, r.name, r.description)) as roles
+      FROM
+          my_user u
+          LEFT JOIN user_role ur ON ur.user_id = u.id::TEXT
+          LEFT JOIN role r ON ur.role_id = r.id::TEXT
+      GROUP BY
+          u.username;
+      `,
+    );
   }
 
   findOne(id: string) {

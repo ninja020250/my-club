@@ -4,8 +4,8 @@ import { UpdateFundHistoryDto } from './dto/update-fund-history.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FundHistory } from './entities/fund-history.entity';
 import { Repository } from 'typeorm';
-import { Club } from 'src/club/entities/club.entity';
-import { User } from 'src/user/entities/user.entity';
+import { Club } from 'src/features/club/entities/club.entity';
+import { User } from 'src/features/user/entities/user.entity';
 
 @Injectable()
 export class FundHistoryService {

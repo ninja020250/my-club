@@ -22,12 +22,14 @@ SELECT
 FROM
 	my_user u
 	LEFT JOIN user_role ur ON ur.user_id = u.id
-	LEFT JOIN role r ON ur.role_id = r.id -- Create Table role
-	CREATE TABLE IF NOT EXISTS role (
-		id serial PRIMARY KEY,
-		name VARCHAR (200),
-		description TEXT
-	);
+	LEFT JOIN role r ON ur.role_id = r.id;
+
+-- Create Table role
+CREATE TABLE IF NOT EXISTS role (
+	id serial PRIMARY KEY,
+	name VARCHAR (200),
+	description TEXT
+);
 
 -- Create Table mapping role & user
 CREATE TABLE IF NOT EXISTS user_role (

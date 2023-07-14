@@ -11,10 +11,11 @@ import {
 import { FundHistoryService } from './fund-history.service';
 import { CreateFundHistoryDto } from './dto/create-fund-history.dto';
 import { UpdateFundHistoryDto } from './dto/update-fund-history.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from 'src/auth/auth.guard';
 
 @ApiTags('fund-history')
+@ApiBearerAuth()
 @Controller('fund-history')
 export class FundHistoryController {
   constructor(private readonly fundHistoryService: FundHistoryService) {}

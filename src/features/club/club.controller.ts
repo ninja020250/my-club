@@ -13,6 +13,8 @@ import { CreateClubDto } from './dto/create-club.dto';
 import { UpdateClubDto } from './dto/update-club.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from 'src/auth/auth.guard';
+import { Roles } from 'src/decorators/roles.decorator';
+import { Role } from 'src/enums/role.enum';
 
 @ApiTags('club')
 @ApiBearerAuth()
@@ -22,12 +24,14 @@ export class ClubController {
 
   @Post()
   @UseGuards(AuthGuard)
+  @Roles(Role.host)
   create(@Body() createClubDto: CreateClubDto) {
     return this.clubService.create(createClubDto);
   }
 
   @Get()
   @UseGuards(AuthGuard)
+  @Roles(Role.host)
   findAll() {
     return this.clubService.findAll();
   }
