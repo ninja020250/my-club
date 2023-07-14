@@ -3,9 +3,11 @@ import { FundHistoryService } from './fund-history.service';
 import { FundHistoryController } from './fund-history.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { FundHistory } from './entities/fund-history.entity';
+import { Club } from 'src/club/entities/club.entity';
+import { User } from 'src/user/entities/user.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([FundHistory])],
+  imports: [TypeOrmModule.forFeature([FundHistory, Club, User])],
   controllers: [FundHistoryController],
   providers: [FundHistoryService],
 })

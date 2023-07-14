@@ -4,31 +4,68 @@ import { UpdateFundHistoryDto } from './dto/update-fund-history.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FundHistory } from './entities/fund-history.entity';
 import { Repository } from 'typeorm';
+import { Club } from 'src/club/entities/club.entity';
+import { User } from 'src/user/entities/user.entity';
 
 @Injectable()
 export class FundHistoryService {
   constructor(
     @InjectRepository(FundHistory)
     private fundHistoryRepository: Repository<FundHistory>,
+
+    @InjectRepository(User)
+    private userRepository: Repository<User>,
+
+    @InjectRepository(Club)
+    private clubRepository: Repository<Club>,
   ) {}
 
-  create(createFundHistoryDto: CreateFundHistoryDto) {
-    return this.fundHistoryRepository.insert(createFundHistoryDto);
+  async create(createFundHistoryDto: CreateFundHistoryDto) {
+    try {
+      console.log('start create: fund-history');
+      const clubExist = await this.clubRepository.exist({
+        where: { id: createFundHistoryDto.clubId },
+      });
+      const userExist = await this.userRepository.exist({
+        where: { id: createFundHistoryDto.createdBy },
+      });
+      if (!clubExist || !userExist) {
+        throw new Error('club or user not found');
+      }
+      return this.fundHistoryRepository
+        .createQueryBuilder()
+        .insert()
+        .values(createFundHistoryDto)
+        .returning('*')
+        .execute();
+    } finally {
+      console.log('end create: fund-history');
+    }
   }
 
   findAll() {
-    return `This action returns all fundHistory`;
+    return this.fundHistoryRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} fundHistory`;
+  findOne(id: string) {
+    return this.fundHistoryRepository.findOne({ where: { id } });
   }
 
-  update(id: number, updateFundHistoryDto: UpdateFundHistoryDto) {
-    return `This action updates a #${id} fundHistory`;
+  update(id: string, updateFundHistoryDto: UpdateFundHistoryDto) {
+    return this.fundHistoryRepository
+      .createQueryBuilder()
+      .update(updateFundHistoryDto)
+      .where('id = :id', { id })
+      .returning('*')
+      .execute();
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} fundHistory`;
+  remove(id: string) {
+    return this.fundHistoryRepository
+      .createQueryBuilder()
+      .delete()
+      .where('id = :id', { id })
+      .returning('*')
+      .execute();
   }
 }

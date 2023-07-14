@@ -4,24 +4,16 @@ import { DataSource } from 'typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { FundHistoryModule } from './fund-history/fund-history.module';
-
-import { FundHistory } from './entity/fund-history.entity';
+import { ClubModule } from './club/club.module';
+import { typeOrmConfig } from './config/typeorm.config';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
     FundHistoryModule,
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: 'admin',
-      database: 'myClub',
-      // entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-      entities: [FundHistory],
-      synchronize: true,
-      autoLoadEntities: true,
-    }),
+    TypeOrmModule.forRoot(typeOrmConfig),
+    ClubModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -10,14 +10,17 @@ import {
 import { FundHistoryService } from './fund-history.service';
 import { CreateFundHistoryDto } from './dto/create-fund-history.dto';
 import { UpdateFundHistoryDto } from './dto/update-fund-history.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('fund-history')
 @Controller('fund-history')
 export class FundHistoryController {
   constructor(private readonly fundHistoryService: FundHistoryService) {}
 
   @Post()
-  create(@Body() createFundHistoryDto: CreateFundHistoryDto) {
-    return this.fundHistoryService.create(createFundHistoryDto);
+  async create(@Body() createFundHistoryDto: CreateFundHistoryDto) {
+    const res = await this.fundHistoryService.create(createFundHistoryDto);
+    return res.generatedMaps[0];
   }
 
   @Get()
@@ -27,19 +30,20 @@ export class FundHistoryController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.fundHistoryService.findOne(+id);
+    return this.fundHistoryService.findOne(id);
   }
 
   @Patch(':id')
-  update(
+  async update(
     @Param('id') id: string,
     @Body() updateFundHistoryDto: UpdateFundHistoryDto,
   ) {
-    return this.fundHistoryService.update(+id, updateFundHistoryDto);
+    const res = await this.fundHistoryService.update(id, updateFundHistoryDto);
+    return res.generatedMaps[0];
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.fundHistoryService.remove(+id);
+    return this.fundHistoryService.remove(id);
   }
 }
