@@ -15,9 +15,13 @@ export class User {
   @Column({ type: 'varchar' })
   username: string;
 
+  @Column({ type: 'varchar' })
+  email: string;
+
   @Column({ type: 'text' })
   password: string;
 
+  // T:terminate, A:active, I:Inactive
   @Column({ type: 'varchar' })
   status: string;
 

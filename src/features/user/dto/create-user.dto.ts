@@ -10,10 +10,13 @@ export class CreateUserDto {
   @ApiProperty({ default: 'player' })
   username: string;
 
+  @ApiProperty({ default: '' })
+  email: string;
+
   @ApiProperty({ default: 'player' })
   password: string;
 
-  @ApiProperty({ default: 'active' })
+  @ApiProperty({ default: 'I' })
   status: string;
 
   @ApiProperty({ default: 'https://picsum.photos/200/300' })

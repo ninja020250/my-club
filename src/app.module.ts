@@ -9,8 +9,9 @@ import { typeOrmConfig } from './config/typeorm.config';
 import { UserModule } from './features/user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
-import { RolesGuard } from './features/role/roles.guard';
 import { RoleModule } from './features/role/role.module';
+import { AuthorizationModule } from './authorization/authorization.module';
+import { AuthorizationGuard } from './authorization/authorization.guard';
 
 @Module({
   imports: [
@@ -20,13 +21,14 @@ import { RoleModule } from './features/role/role.module';
     UserModule,
     AuthModule,
     RoleModule,
+    AuthorizationModule,
   ],
   controllers: [AppController],
   providers: [
     AppService,
     {
       provide: APP_GUARD,
-      useClass: RolesGuard,
+      useClass: AuthorizationGuard,
     },
   ],
 })

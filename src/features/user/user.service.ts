@@ -25,19 +25,32 @@ export class UserService {
     return this.userRepository.query(
       `SELECT
         u.username,
-        ARRAY_AGG(jsonb_build_object('id', 'name', 'description', r.id, r.name, r.description)) as roles
+        ARRAY_AGG(jsonb_build_object('name',  r.name, 'description', r.description)) as roles
       FROM
           my_user u
           LEFT JOIN user_role ur ON ur.user_id = u.id::TEXT
-          LEFT JOIN role r ON ur.role_id = r.id::TEXT
+          LEFT JOIN role r ON ur.role_name = r.name::TEXT
       GROUP BY
           u.username;
       `,
     );
   }
 
-  findOne(id: string) {
-    return this.userRepository.findOne({ where: { id } });
+  async findOne(id: string) {
+    const result = await this.userRepository.query(
+      `SELECT
+        u.username,
+        ARRAY_AGG(jsonb_build_object('name',  r.name, 'description', r.description)) as roles
+      FROM
+          my_user u
+          LEFT JOIN user_role ur ON ur.user_id = u.id::TEXT
+          LEFT JOIN role r ON ur.role_name = r.name::TEXT
+      WHERE u.id::TEXT='${id}'
+      GROUP BY 
+        u.username, u.id;
+      `,
+    );
+    return result.length ? result[0] : null;
   }
 
   findOneByUsername(username: string) {
