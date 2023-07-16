@@ -62,7 +62,7 @@ export class EventService {
     return this.eventRepository.query(
       `
       SELECT 
-        e.id, 
+        e.id,   
         e.name,
         e.description,
         e.num_of_slot AS "numOfSlot",
