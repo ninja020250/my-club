@@ -9,7 +9,7 @@ export class User {
   @Column({ type: 'varchar' })
   name: string;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: 'varchar', name: 'last_name' })
   lastName: string;
 
   @Column({ type: 'varchar' })
@@ -30,6 +30,10 @@ export class User {
 
   @Column({ type: 'int' })
   age: number;
+
+  // // FullTime -- PartTime
+  // @Column({ default: 'PartTime' })
+  // type: string;
 
   roles: Role[];
 }

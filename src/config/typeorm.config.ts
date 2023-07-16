@@ -12,7 +12,7 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   password: 'admin',
   database: 'myClub',
   //   entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-  entities: [FundHistory, Club, User, Role],
+  entities: [FundHistory, Club, User, Role, Event],
   synchronize: true,
   autoLoadEntities: true,
 };

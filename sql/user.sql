@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS my_user (
 	password TEXT,
 	status TEXT,
 	avatar VARCHAR (250),
+	type VARCHAR (250),
 	age INT
 );
 

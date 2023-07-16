@@ -1,20 +1,22 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Patch,
-  Param,
+  Controller,
   Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Req,
+  UnauthorizedException,
   UseGuards,
 } from '@nestjs/common';
-import { UserService } from './user.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { Authorization } from 'src/decorators/Authorization.decorator';
 import { Role } from 'src/enums/role.enum';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
+import { UserService } from './user.service';
 
 @ApiTags('user')
 @ApiBearerAuth()
@@ -30,7 +32,7 @@ export class UserController {
 
   @Get()
   @UseGuards(AuthGuard)
-  @Authorization(Role.host)
+  @Authorization(Role.Host)
   findAll() {
     return this.userService.findAll();
   }
@@ -39,6 +41,18 @@ export class UserController {
   @UseGuards(AuthGuard)
   findOne(@Param('id') id: string) {
     return this.userService.findOne(id);
+  }
+
+  @Post('update-my-profile')
+  @UseGuards(AuthGuard)
+  updateMyProfile(
+    @Req() request: any,
+    @Param('id') id: string,
+    @Body() updateUserDto: UpdateUserDto,
+  ) {
+    const { user } = request;
+    if (user.id != id) throw new UnauthorizedException();
+    return this.userService.update(id, updateUserDto);
   }
 
   @Patch(':id')

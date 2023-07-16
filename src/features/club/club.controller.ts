@@ -1,20 +1,20 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Patch,
-  Param,
+  Controller,
   Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Query,
+  Req,
   UseGuards,
 } from '@nestjs/common';
+import { ApiBearerAuth, ApiQuery, ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from 'src/auth/auth.guard';
 import { ClubService } from './club.service';
 import { CreateClubDto } from './dto/create-club.dto';
 import { UpdateClubDto } from './dto/update-club.dto';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { AuthGuard } from 'src/auth/auth.guard';
-import { Authorization } from 'src/decorators/Authorization.decorator';
-import { Role } from 'src/enums/role.enum';
 
 @ApiTags('club')
 @ApiBearerAuth()
@@ -32,6 +32,23 @@ export class ClubController {
   @UseGuards(AuthGuard)
   findAll() {
     return this.clubService.findAll();
+  }
+
+  @Get('my-club-members')
+  @ApiQuery({
+    name: 'clubId',
+    required: true,
+    schema: { oneOf: [{ type: 'string' }] },
+  })
+  @UseGuards(AuthGuard)
+  findAllMemberInClub(@Query('clubId') clubId: string) {
+    return this.clubService.findAllPlayerByClubId(clubId);
+  }
+
+  @Get('my-club')
+  @UseGuards(AuthGuard)
+  finMyClub(@Req() request: any) {
+    return this.clubService.findAllByUserId(request.user.id);
   }
 
   @Get(':id')

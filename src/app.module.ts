@@ -12,6 +12,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { RoleModule } from './features/role/role.module';
 import { AuthorizationModule } from './authorization/authorization.module';
 import { AuthorizationGuard } from './authorization/authorization.guard';
+import { EventModule } from './features/event/event.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { AuthorizationGuard } from './authorization/authorization.guard';
     AuthModule,
     RoleModule,
     AuthorizationModule,
+    EventModule,
   ],
   controllers: [AppController],
   providers: [

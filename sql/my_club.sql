@@ -10,8 +10,8 @@ CREATE TABLE IF NOT EXISTS club (
 
 -- Create Table
 CREATE TABLE IF NOT EXISTS club_user (
-	club_id INT,
-	user_id INT,
+	club_id TEXT,
+	user_id TEXT,
 	PRIMARY KEY (club_id, user_id)
 );
 
