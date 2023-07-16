@@ -34,8 +34,8 @@ CREATE TABLE IF NOT EXISTS role (
 
 -- Create Table mapping role & user
 CREATE TABLE IF NOT EXISTS user_role (
-	user_id INT,
-	role_id INT,
+	user_id TEXT,
+	role_id TEXT,
 	PRIMARY KEY (user_id, role_id)
 );
 

@@ -49,6 +49,15 @@ export class EventService {
     );
   }
 
+  async hasRegistered(userId: string, eventId: string): Promise<boolean> {
+    const result = await this.eventRepository.query(
+      `
+      SELECT * FROM event_user eu WHERE eu.event_id = '${eventId}' AND user_id = '${userId}';
+      `,
+    );
+    return result.length > 0;
+  }
+
   findAllByClubId(clubId: string) {
     return this.eventRepository.query(
       `

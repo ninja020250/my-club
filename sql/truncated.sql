@@ -15,6 +15,10 @@ DROP TABLE IF EXISTS club_user;
 
 DROP TABLE IF EXISTS fund_history;
 
+DROP TABLE IF EXISTS event_user;
+
+DROP TABLE IF EXISTS event;
+
 -------------------- Create tables --------------------
 CREATE TABLE IF NOT EXISTS club (
 	id SERIAL PRIMARY KEY,

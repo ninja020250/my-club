@@ -34,7 +34,7 @@ export class EventController {
     return this.eventService.create(createEventDto);
   }
 
-  @Post()
+  @Post('register-for-event')
   @UseGuards(AuthGuard)
   @Authorization(Role.Member, Role.Host, Role.Treasurer)
   async registerForEvent(
@@ -42,15 +42,27 @@ export class EventController {
     @Query('eventId') eventId: string,
   ) {
     const remainingSlot = await this.eventService.countRemainingSlot(eventId);
-    if (remainingSlot <= 0)
+    const hasRegistered = await this.eventService.hasRegistered(
+      request?.user?.id,
+      eventId,
+    );
+    if (remainingSlot <= 0) {
       throw new HttpException(
         'Event has been full slot',
         HttpStatus.BAD_REQUEST,
       );
+    }
+    if (hasRegistered) {
+      throw new HttpException(
+        'You has been in the event already!',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+
     return this.eventService.playerRegisterForEvent(eventId, request?.user?.id);
   }
 
-  @Post()
+  @Post('unregister-for-event')
   @UseGuards(AuthGuard)
   @Authorization(Role.Member, Role.Host, Role.Treasurer)
   unregisterForEvent(@Req() request: any, @Query('eventId') eventId: string) {
