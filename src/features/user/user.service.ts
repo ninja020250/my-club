@@ -4,6 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
+import { encodeMD5 } from '../../utils/crypto';
 
 @Injectable()
 export class UserService {
@@ -13,6 +14,8 @@ export class UserService {
   ) {}
 
   create(createUserDto: CreateUserDto) {
+    const encodedPass = encodeMD5(createUserDto.password);
+    createUserDto.password = encodedPass;
     return this.userRepository
       .createQueryBuilder()
       .insert()
@@ -66,6 +69,16 @@ export class UserService {
       .execute();
   }
 
+  updatePassword(username: string, password: string) {
+    const encodedPass = encodeMD5(password);
+    return this.userRepository
+      .createQueryBuilder()
+      .update({ password: encodedPass })
+      .where('username = :username', { username })
+      .returning('*')
+      .execute();
+  }
+
   remove(id: string) {
     return this.userRepository
       .createQueryBuilder()
@@ -73,5 +86,10 @@ export class UserService {
       .where('id = :id', { id })
       .returning('*')
       .execute();
+  }
+
+  async usernameExist(username: string) {
+    const result = await this.userRepository.findOne({ where: { username } });
+    return result != null;
   }
 }

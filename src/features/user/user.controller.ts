@@ -17,6 +17,7 @@ import { Role } from 'src/enums/role.enum';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserService } from './user.service';
+import { ExistsException } from 'src/dtos/exceptions/ExistsException';
 
 @ApiTags('user')
 @ApiBearerAuth()
@@ -25,8 +26,15 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
-  // @UseGuards(AuthGuard)
-  create(@Body() createUserDto: CreateUserDto) {
+  @UseGuards(AuthGuard)
+  @Authorization(Role.Host)
+  async create(@Body() createUserDto: CreateUserDto) {
+    const userExists = this.userService.usernameExist(createUserDto.username);
+    if (userExists)
+      throw new ExistsException(
+        'USER_EXISTS',
+        'This username is already taken!',
+      );
     return this.userService.create(createUserDto);
   }
 
