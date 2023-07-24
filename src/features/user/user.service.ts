@@ -16,6 +16,7 @@ export class UserService {
   create(createUserDto: CreateUserDto) {
     const encodedPass = encodeMD5(createUserDto.password);
     createUserDto.password = encodedPass;
+    createUserDto.status = 'I';
     return this.userRepository
       .createQueryBuilder()
       .insert()

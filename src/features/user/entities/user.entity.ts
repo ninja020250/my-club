@@ -21,7 +21,9 @@ export class User {
   @Column({ type: 'text' })
   password: string;
 
-  // T:terminate, A:active, I:Inactive
+  /**
+   * T:terminate, A:active, I:Inactive
+   */
   @Column({ type: 'varchar' })
   status: string;
 
@@ -31,9 +33,11 @@ export class User {
   @Column({ type: 'int' })
   age: number;
 
-  // // FullTime -- PartTime
-  // @Column({ default: 'PartTime' })
-  // type: string;
+  /**
+   * FullTime -- PartTime
+   */
+  @Column({ default: 'PartTime' })
+  type: string;
 
   roles: Role[];
 }

@@ -60,6 +60,9 @@ export class UserController {
   ) {
     const { user } = request;
     if (user.id != id) throw new UnauthorizedException();
+    if (user.status === 'I') {
+      updateUserDto.status = 'A';
+    }
     return this.userService.update(id, updateUserDto);
   }
 
