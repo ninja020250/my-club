@@ -6,6 +6,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     logger: ['error', 'warn'],
   });
+  app.enableCors();
 
   const config = new DocumentBuilder()
     .setTitle('My Club APIs')
