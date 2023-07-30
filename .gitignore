@@ -25,36 +25,36 @@ my-club-client/*.sw?
 my-club-client/.turbo
 
 # my-club-server
-my-club-client/dist
-my-club-client/node_modules
-my-club-client/# Logs
-my-club-client/logs
-my-club-client/*.log
-my-club-client/npm-debug.log*
-my-club-client/pnpm-debug.log*
-my-club-client/yarn-debug.log*
-my-club-client/yarn-error.log*
-my-club-client/lerna-debug.log*
-my-club-client/
-my-club-client/# OS
-my-club-client/.DS_Store
-my-club-client/
-my-club-client/# Tests
-my-club-client/coverage
-my-club-client/.nyc_output
-my-club-client/
-my-club-client/# IDEs and editors
-my-club-client/.idea
-my-club-client/.project
-my-club-client/.classpath
-my-club-client/.c9/
-my-club-client/*.launch
-my-club-client/.settings/
-my-club-client/*.sublime-workspace
-my-club-client/
-my-club-client/# IDE - VSCode
-my-club-client/.vscode/*
-my-club-client/!.vscode/settings.json
-my-club-client/!.vscode/tasks.json
-my-club-client/!.vscode/launch.json
-my-club-client/!.vscode/extensions.json
+my-club-server/dist
+my-club-server/node_modules
+my-club-server/# Logs
+my-club-server/logs
+my-club-server/*.log
+my-club-server/npm-debug.log*
+my-club-server/pnpm-debug.log*
+my-club-server/yarn-debug.log*
+my-club-server/yarn-error.log*
+my-club-server/lerna-debug.log*
+my-club-server/
+my-club-server/# OS
+my-club-server/.DS_Store
+my-club-server/
+my-club-server/# Tests
+my-club-server/coverage
+my-club-server/.nyc_output
+my-club-server/
+my-club-server/# IDEs and editors
+my-club-server/.idea
+my-club-server/.project
+my-club-server/.classpath
+my-club-server/.c9/
+my-club-server/*.launch
+my-club-server/.settings/
+my-club-server/*.sublime-workspace
+my-club-server/
+my-club-server/# IDE - VSCode
+my-club-server/.vscode/*
+my-club-server/!.vscode/settings.json
+my-club-server/!.vscode/tasks.json
+my-club-server/!.vscode/launch.json
+my-club-server/!.vscode/extensions.json
