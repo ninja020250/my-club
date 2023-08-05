@@ -1,6 +1,4 @@
 import {
-  FormControl,
-  FormLabel,
   IconButton,
   Input,
   InputGroup,
@@ -8,11 +6,15 @@ import {
   InputRightElement,
   useDisclosure,
   useMergeRefs,
-} from "@chakra-ui/react";
-import { forwardRef, useRef } from "react";
-import { HiEye, HiEyeOff } from "react-icons/hi";
+} from '@chakra-ui/react';
+import { forwardRef, useRef } from 'react';
+import { HiEye, HiEyeOff } from 'react-icons/hi';
 
-export const PasswordField = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+export const PasswordField = forwardRef<
+  HTMLInputElement,
+  { inputProps?: InputProps; children?: React.ReactNode }
+>((props, ref) => {
+  const { inputProps = {} } = props;
   const { isOpen, onToggle } = useDisclosure();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -25,31 +27,27 @@ export const PasswordField = forwardRef<HTMLInputElement, InputProps>((props, re
   };
 
   return (
-    <FormControl>
-      <FormLabel htmlFor="password">Password</FormLabel>
-      <InputGroup>
-        <InputRightElement>
-          <IconButton
-            variant="text"
-            aria-label={isOpen ? "Mask password" : "Reveal password"}
-            icon={isOpen ? <HiEyeOff /> : <HiEye />}
-            onClick={onClickReveal}
-          />
-        </InputRightElement>
-        <Input
-          id="password"
-          ref={mergeRef}
-          name="password"
-          type={isOpen ? "text" : "password"}
-          autoComplete="current-password"
-          required
-          {...props}
+    <InputGroup>
+      <InputRightElement>
+        <IconButton
+          variant="text"
+          aria-label={isOpen ? 'Mask password' : 'Reveal password'}
+          icon={isOpen ? <HiEyeOff /> : <HiEye />}
+          onClick={onClickReveal}
         />
-      </InputGroup>
-    </FormControl>
+      </InputRightElement>
+      <Input
+        id="password"
+        ref={mergeRef}
+        name="password"
+        type={isOpen ? 'text' : 'password'}
+        autoComplete="current-password"
+        {...inputProps}
+      />
+    </InputGroup>
   );
 });
 
-PasswordField.displayName = "PasswordField";
+PasswordField.displayName = 'PasswordField';
 
 export default PasswordField;
