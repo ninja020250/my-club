@@ -1,4 +1,4 @@
-import { ROUTES } from '@/app.config';
+import { ROUTES } from '@/config/route.config';
 
 export const getRoutes = (
   initRoutes: any[] = ROUTES,

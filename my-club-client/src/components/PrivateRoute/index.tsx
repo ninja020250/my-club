@@ -1,10 +1,8 @@
-import { ROUTE_PATHS } from '@/app.config';
 import { selectAuthStatus } from '@/features/AuthSlice';
 import { useAppSelector } from '@/hooks/useRedux';
 import React, { Suspense } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
-import { Navigate } from 'react-router';
 
 type PrivateRoutePropsTypes = {
   children: React.ReactNode;

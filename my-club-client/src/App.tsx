@@ -1,10 +1,10 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
-import '../i18n';
+import './config/i18n';
 import MainLayout from './components/MainLayout';
 import PrivateRoute from './components/PrivateRoute';
 import { getRoutes } from './utils/route';
 import RouteWithSubRoutes from './components/RouteWithSubRoutes';
-import { ROUTE_PATHS } from './app.config';
+import { ROUTE_PATHS } from './config/route.config';
 
 function App() {
   return (

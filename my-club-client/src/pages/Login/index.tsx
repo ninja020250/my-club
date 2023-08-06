@@ -1,4 +1,4 @@
-import { ROUTE_PATHS } from '@/app.config';
+import { ROUTE_PATHS } from '@/config/route.config';
 import { Logo, PasswordField } from '@/components';
 import { loginAsync, selectAuthStatus } from '@/features/AuthSlice';
 import { useAppDispatch, useAppSelector } from '@/hooks/useRedux';

@@ -15,6 +15,7 @@ module.exports = {
     'react/prop-types': 'off',
     'import/no-anonymous-default-export': 0,
     '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-unused-vars': '0',
     'react-refresh/only-export-components': [
       'warn',
       { allowConstantExport: true },

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function GameDetail(props) {
+function GameDetail(props: any) {
   return <div>GameDetail</div>;
 }
 
