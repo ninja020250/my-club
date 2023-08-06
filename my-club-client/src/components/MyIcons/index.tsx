@@ -6,6 +6,7 @@ import {
   ArrowRight2,
   ArrowLeft2,
   ProfileCircle,
+  Category2,
 } from 'iconsax-react';
 import { Suspense } from 'react';
 
@@ -46,6 +47,9 @@ const MyIcon = ({
     ),
     profileCircle: (
       <ProfileCircle size={size} color={_color} variant={variant} {...rest} />
+    ),
+    category2: (
+      <Category2 size={size} color={_color} variant={variant} {...rest} />
     ),
   };
   return (

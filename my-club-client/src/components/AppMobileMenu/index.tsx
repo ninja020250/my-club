@@ -39,6 +39,9 @@ export default function AppMobileMenu() {
   const { colors } = useTheme();
   if (md) return null;
 
+  const isOptionActive =
+    menuItems.findIndex((item) => item.key === selected) < 0;
+
   return (
     <Box
       width="full"
@@ -51,10 +54,17 @@ export default function AppMobileMenu() {
     >
       <HStack justify="space-between">
         <MenuItem
-          isSelected={false}
+          isSelected={isOptionActive}
           onClick={toggle}
-          label="Tùy chọn"
-          icon={<MyIcon name="menu" color={colors.gray[600]} />}
+          label={t('menu.title.navigate')}
+          icon={
+            <MyIcon
+              size={28}
+              variant={isOptionActive ? 'Bold' : 'Outline'}
+              name="category2"
+              color={isOptionActive ? colors.teal[600] : colors.gray[600]}
+            />
+          }
         />
         {menuItems.map((item) => {
           const isSelected = selected === item.key;
