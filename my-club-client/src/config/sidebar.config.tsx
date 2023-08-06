@@ -1,13 +1,20 @@
 import { ROUTE_PATHS } from '@/config/route.config';
-import { Home, Game, WalletMoney } from 'iconsax-react';
+import { Home, Game, WalletMoney, ProfileCircle } from 'iconsax-react';
 
 export const SIDEBAR_MENU_ITEMS = [
   {
     name: 'MENU_DASHBOARD',
-    key: ROUTE_PATHS.HOME,
+    key: ROUTE_PATHS.DASHBOARD,
     icon: Home,
     label: 'menu.title.home',
     roles: ['Admin'],
+  },
+  {
+    name: 'MENU_PROFILE',
+    key: ROUTE_PATHS.PROFILE,
+    icon: ProfileCircle,
+    label: 'menu.title.profile',
+    roles: [],
   },
   {
     name: 'MENU_GAME_PLAY',

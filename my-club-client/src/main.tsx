@@ -20,7 +20,7 @@ configResponsive(breakpoints);
 export const theme = extendTheme(
   {
     initialColorMode: 'dark',
-    colors: { ...baseTheme.colors, brand: baseTheme.colors.blue },
+    colors: { ...baseTheme.colors, brand: baseTheme.colors.teal },
   },
   proTheme,
 );

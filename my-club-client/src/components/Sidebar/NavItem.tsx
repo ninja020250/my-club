@@ -26,6 +26,7 @@ const NavItem = ({ icon, label, expanded, selected, ...rest }: any) => {
         }}
         bg={selected ? 'teal.400' : 'white'}
         color={selected ? 'white' : 'black'}
+        transition="background 0.3s ease"
         {...rest}
       >
         {icon && <Icon fontSize="24" as={icon} />}

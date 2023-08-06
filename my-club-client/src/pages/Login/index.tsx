@@ -35,7 +35,7 @@ export const LoginPage = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (isLoggedIn) navigate(ROUTE_PATHS.GAME);
+    if (isLoggedIn) navigate(ROUTE_PATHS.GAME_PLAY);
   }, [isLoggedIn]);
 
   const onSubmit = (values: Inputs) => {

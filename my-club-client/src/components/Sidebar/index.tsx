@@ -6,10 +6,7 @@ import { useSideBar } from '@/hooks/useSidebar';
 
 function ResponsiveSidebar({ appVersion }: any) {
   const { md } = useResponsive();
-  const { expanded, toggle, open, close } = useSideBar();
-  const [selected, setSelected] = useState('');
-
-  const selectItem = (item: any) => setSelected(item.key);
+  const { expanded, selected, selectItem, toggle, open, close } = useSideBar();
 
   const useExpandedValue = (collapseValue: any, expandedValue: any) => {
     return expanded ? expandedValue : collapseValue;

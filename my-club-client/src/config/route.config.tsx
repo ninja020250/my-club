@@ -3,6 +3,7 @@ import GameDetail from '@/pages/private/gamePlay/GameDetail';
 import LoginPage from '@/pages/login';
 import DashboardPage from '@/pages/private/dashoard';
 import BudgetPage from '@/pages/private/budget';
+import ProfilePage from '@/pages/private/profile';
 
 export const ROUTE_PATHS = {
   LOGIN: '/login',
@@ -10,6 +11,7 @@ export const ROUTE_PATHS = {
   DASHBOARD: '/dashboard',
   GAME_PLAY: '/game-play',
   BUDGET: '/budget',
+  PROFILE: '/profile',
 };
 
 export const ROUTES = [
@@ -39,6 +41,15 @@ export const ROUTES = [
         pageTitle: 'page.title.dashboard',
         privateRoute: true,
         breadcrumbTitle: 'page.title.dashboard',
+        roles: [],
+      },
+      {
+        key: ROUTE_PATHS.PROFILE,
+        path: `${ROUTE_PATHS.PROFILE}/*`,
+        component: ProfilePage,
+        pageTitle: 'page.title.profile',
+        privateRoute: true,
+        breadcrumbTitle: 'page.title.profile',
         roles: [],
       },
       {

@@ -3,4 +3,5 @@ export default {
   'menu.title.home': 'Trang chủ',
   'menu.title.game': 'Lịch chơi',
   'menu.title.budget': 'Ngân sách',
+  'menu.title.profile': 'Cá nhân',
 };
