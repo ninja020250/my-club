@@ -27,7 +27,7 @@ const SidebarContent = ({
 
   return (
     <Box bg={useColorModeValue('white', 'grey.900')} h="full">
-      <Flex alignItems="start" mx="5" my="4" p="1" justifyContent="start">
+      <Flex alignItems="center" mx="5" my="4" p="1" justifyContent="start">
         <IconButton
           colorScheme="teal"
           variant="ghost"
@@ -38,9 +38,9 @@ const SidebarContent = ({
         <Collapse in={expanded} animateOpacity>
           <Text
             ml="2"
-            fontSize="2xl"
+            fontSize="xl"
             fontWeight="bold"
-            color="teal.600"
+            color="teal.500"
             whiteSpace="nowrap"
           >
             Feathers Punk

@@ -1,8 +1,7 @@
+import { useSideBar } from '@/hooks/useSidebar';
 import { useResponsive } from 'ahooks';
-import { useState } from 'react';
 import DesktopSidebar from './DesktopSidebar';
 import { MobileSideBar } from './MobileSidebar';
-import { useSideBar } from '@/hooks/useSidebar';
 
 function ResponsiveSidebar({ appVersion }: any) {
   const { md } = useResponsive();

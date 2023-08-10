@@ -1,5 +1,6 @@
 import { useTheme } from '@chakra-ui/react';
 import {
+  Home,
   Menu,
   HambergerMenu,
   Game,
@@ -51,6 +52,7 @@ const MyIcon = ({
     category2: (
       <Category2 size={size} color={_color} variant={variant} {...rest} />
     ),
+    home: <Home size={size} color={_color} variant={variant} {...rest} />,
   };
   return (
     <>

@@ -1,5 +1,7 @@
+import MainLayout from '@/components/MainLayout';
+
 function DashboardPage(props: any) {
-  return <div>Dashboard</div>;
+  return <MainLayout.Container>Dashboard</MainLayout.Container>;
 }
 
 DashboardPage.propTypes = {};

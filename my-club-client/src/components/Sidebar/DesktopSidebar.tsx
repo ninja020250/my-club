@@ -1,19 +1,10 @@
-import {
-  Box,
-  Collapse,
-  Stack,
-  Text,
-  useColorModeValue,
-} from '@chakra-ui/react';
-import { useState } from 'react';
-import SidebarContent from './SidebarContent';
+import { Box, useColorModeValue } from '@chakra-ui/react';
 import AppVersionTag from './AppVersionTag';
+import SidebarContent from './SidebarContent';
 
 export default function DesktopSidebar({
   expanded,
   selected,
-  onOpen,
-  onClose,
   onToggle,
   onSelectedItem,
   useExpandedValue,
@@ -21,10 +12,12 @@ export default function DesktopSidebar({
 }: any) {
   return (
     <Box
+      borderTopLeftRadius="2xl"
+      borderTopRightRadius="2xl"
       position="relative"
       transition="width 0.3s ease"
       minH="100vh"
-      width={useExpandedValue('90px', 280)}
+      width={useExpandedValue('90px', 231)}
       boxShadow="md"
       bg={useColorModeValue('white', 'white')}
     >

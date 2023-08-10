@@ -1,21 +1,26 @@
 import config from '@/config/app.config';
-import { HStack } from '@chakra-ui/react';
+import { Box, HStack, VStack } from '@chakra-ui/react';
 import { Outlet } from 'react-router-dom';
 import ResponsiveSidebar from '../Sidebar';
-import MobileMenu from '../AppMobileMenu';
+import MobileBottomBar from '../MobileBottomBar';
+import Navbars from '../Navbars';
+import Container from './Container';
 
 function MainLayout() {
   return (
-    <div>
-      <HStack align="start">
+    <>
+      <HStack align="start" gap={0}>
         <ResponsiveSidebar appVersion={config.appVersion} />
-        <MobileMenu />
-        <Outlet />
+        <VStack alignItems="start" w="full" height="100vh">
+          <Navbars />
+          <Outlet />
+        </VStack>
       </HStack>
-    </div>
+      <MobileBottomBar />
+    </>
   );
 }
 
-MainLayout.propTypes = {};
+MainLayout.Container = Container;
 
 export default MainLayout;

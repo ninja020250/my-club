@@ -11,7 +11,7 @@ export const MenuItem = ({ label, icon, onClick, isSelected }: any) => {
       {icon}
       <Text
         fontWeight={isSelected ? 'medium' : 'normal'}
-        color={isSelected ? 'teal.600' : 'gray.900'}
+        color={isSelected ? 'teal.500' : 'gray.900'}
       >
         {label}
       </Text>
@@ -20,6 +20,11 @@ export const MenuItem = ({ label, icon, onClick, isSelected }: any) => {
 };
 
 const menuItems = [
+  {
+    iconName: 'home',
+    key: ROUTE_PATHS.DASHBOARD,
+    label: 'menu.title.dashboard',
+  },
   {
     iconName: 'game',
     key: ROUTE_PATHS.GAME_PLAY,
@@ -32,40 +37,25 @@ const menuItems = [
   },
 ];
 
-export default function AppMobileMenu() {
+export default function MobileBottomBar() {
   const { md } = useResponsive();
-  const { toggle, selected, selectItem } = useSideBar();
+  const { selected, selectItem } = useSideBar();
   const { t } = useTranslation();
   const { colors } = useTheme();
   if (md) return null;
-
-  const isOptionActive =
-    menuItems.findIndex((item) => item.key === selected) < 0;
 
   return (
     <Box
       width="full"
       pos="fixed"
       bottom="0"
-      boxShadow="dark-lg"
-      py="4"
+      boxShadow="2xl"
+      py="3"
       px="8"
       borderTopRadius="2xl"
+      bg="white"
     >
       <HStack justify="space-between">
-        <MenuItem
-          isSelected={isOptionActive}
-          onClick={toggle}
-          label={t('menu.title.navigate')}
-          icon={
-            <MyIcon
-              size={28}
-              variant={isOptionActive ? 'Bold' : 'Outline'}
-              name="category2"
-              color={isOptionActive ? colors.teal[600] : colors.gray[600]}
-            />
-          }
-        />
         {menuItems.map((item) => {
           const isSelected = selected === item.key;
           return (
@@ -78,7 +68,7 @@ export default function AppMobileMenu() {
                 <MyIcon
                   variant={isSelected ? 'Bold' : 'Outline'}
                   name={item.iconName}
-                  color={isSelected ? colors.teal[600] : colors.gray[600]}
+                  color={isSelected ? colors.teal[500] : colors.gray[600]}
                 />
               }
             />

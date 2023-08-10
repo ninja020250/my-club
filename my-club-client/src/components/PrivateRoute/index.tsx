@@ -25,7 +25,7 @@ const PrivateRoute: React.FC<PrivateRoutePropsTypes> = ({
       <Helmet>
         <title>{t(pageTitle)}</title>
       </Helmet>
-      <div>{children}</div>
+      {children}
     </Suspense>
   );
 };

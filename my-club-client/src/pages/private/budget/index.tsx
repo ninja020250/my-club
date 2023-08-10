@@ -1,3 +1,5 @@
+import MainLayout from '@/components/MainLayout';
+
 export default function BudgetPage() {
-  return <div>BudgetPage</div>;
+  return <MainLayout.Container>Budget</MainLayout.Container>;
 }

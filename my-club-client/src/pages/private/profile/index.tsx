@@ -1,3 +1,5 @@
+import MainLayout from '@/components/MainLayout';
+
 export default function ProfilePage() {
-  return <div>ProfilePage</div>;
+  return <MainLayout.Container>Profile</MainLayout.Container>;
 }
