@@ -5,7 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { FundHistoryModule } from './features/fund-history/fund-history.module';
 import { ClubModule } from './features/club/club.module';
-import { typeOrmConfig } from './config/typeorm.config';
+import { typeOrmConfigAsync } from './config/typeorm.config';
 import { UserModule } from './features/user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
@@ -13,11 +13,17 @@ import { RoleModule } from './features/role/role.module';
 import { AuthorizationModule } from './authorization/authorization.module';
 import { AuthorizationGuard } from './authorization/authorization.guard';
 import { EventModule } from './features/event/event.module';
+import { ConfigModule } from '@nestjs/config';
+import configuration from './config/configuration';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: [configuration],
+    }),
+    TypeOrmModule.forRootAsync(typeOrmConfigAsync),
     FundHistoryModule,
-    TypeOrmModule.forRoot(typeOrmConfig),
     ClubModule,
     UserModule,
     AuthModule,
