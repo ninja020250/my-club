@@ -9,10 +9,7 @@ export const typeOrmConfigAsync: TypeOrmModuleAsyncOptions = {
   imports: [ConfigModule],
   useFactory: async (configService: ConfigService) => {
     const databaseConfig = configService.get('database');
-    console.log(
-      '🚀 ~ file: typeorm.config.ts:12 ~ useFactory: ~ databaseConfig:',
-      databaseConfig,
-    );
+    console.log('Start Connect database ~ databaseConfig:', databaseConfig);
     return {
       type: 'postgres',
       host: databaseConfig.host,
@@ -24,6 +21,7 @@ export const typeOrmConfigAsync: TypeOrmModuleAsyncOptions = {
       entities: [FundHistory, Club, User, Role, Event],
       synchronize: true,
       autoLoadEntities: true,
+      logging: true,
     };
   },
   inject: [ConfigService],
