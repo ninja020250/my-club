@@ -1,0 +1,37 @@
+version: '3.5'
+
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=postgrespw
+    container_name: my-club-postgres
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+
+  apis:
+    build:
+      context: ./my-club-sever
+      dockerfile: Dockerfile
+    container_name: my-club-server
+    ports:
+      - '8080:8080'
+    depends_on:
+      - db
+    volumes:
+      - ./my-club-server/src:/app/my-club-server/src
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    container_name: my-club-pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=pgadmin4@pgadmin.org
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    ports:
+      - '5050:80'
+    depends_on:
+      - db
