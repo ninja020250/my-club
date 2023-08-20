@@ -7,12 +7,14 @@ import {
   Param,
   Delete,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { FundHistoryService } from './fund-history.service';
 import { CreateFundHistoryDto } from './dto/create-fund-history.dto';
 import { UpdateFundHistoryDto } from './dto/update-fund-history.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from 'src/auth/auth.guard';
+import { FindAllFundHistoryDto } from './dto/find-all-fund-history.dto';
 
 @ApiTags('fund-history')
 @ApiBearerAuth()
@@ -21,16 +23,18 @@ export class FundHistoryController {
   constructor(private readonly fundHistoryService: FundHistoryService) {}
 
   @Post()
-  @UseGuards(AuthGuard)
+  // @UseGuards(AuthGuard)
   async create(@Body() createFundHistoryDto: CreateFundHistoryDto) {
     const res = await this.fundHistoryService.create(createFundHistoryDto);
     return res.generatedMaps[0];
   }
 
-  @Get()
-  @UseGuards(AuthGuard)
-  findAll() {
-    return this.fundHistoryService.findAll();
+  @Post('/find-all')
+  // @UseGuards(AuthGuard)
+  findAll(
+    @Body() findAllFundHistoryDto: FindAllFundHistoryDto, // @Query('fromDate') fromDate: string, // @Query('toDate') toDate: string,
+  ) {
+    return this.fundHistoryService.findAll(findAllFundHistoryDto);
   }
 
   @Get(':id')

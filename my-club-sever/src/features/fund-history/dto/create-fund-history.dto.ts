@@ -11,9 +11,8 @@ export class CreateFundHistoryDto {
   note: string;
 
   @ApiProperty({ default: 100000 })
-  createdDate: Date;
+  createdBy: string;
 
   @ApiProperty({ default: 100000 })
-  createdBy: string;
   clubId: string;
 }

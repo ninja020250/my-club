@@ -10,7 +10,6 @@ class AuthService extends Request {
     username: string,
     password: string,
   ): Promise<APIResponse.ILoginResponse> => {
-    alert(username);
     return this.instance
       .post('/login', {
         username,

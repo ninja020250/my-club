@@ -3,7 +3,7 @@ import { CreateFundHistoryDto } from './dto/create-fund-history.dto';
 import { UpdateFundHistoryDto } from './dto/update-fund-history.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FundHistory } from './entities/fund-history.entity';
-import { Repository } from 'typeorm';
+import { Between, Repository } from 'typeorm';
 import { Club } from 'src/features/club/entities/club.entity';
 import { User } from 'src/features/user/entities/user.entity';
 
@@ -43,8 +43,12 @@ export class FundHistoryService {
     }
   }
 
-  findAll() {
-    return this.fundHistoryRepository.find();
+  findAll({ fromDate, toDate }: { fromDate: string; toDate: string }) {
+    return this.fundHistoryRepository.find({
+      where: {
+        createdDate: Between(new Date(fromDate), new Date(toDate)),
+      },
+    });
   }
 
   findOne(id: string) {

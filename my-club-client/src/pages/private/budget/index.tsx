@@ -10,8 +10,30 @@ import {
   IconButton,
 } from '@chakra-ui/react';
 import CardBalance from './CardBalance';
+import useList from '@/hooks/useList';
+import FundService from '@/services/FundService';
+import { getEndDateOfMonth, getStartDateOfMonth } from '@/utils/datetime';
+import { useEffect } from 'react';
+import { formatNumberWithCommas } from '@/utils/number';
+
+const fetchData = (fromDate: string, toDate: string) => {
+  const startDateOfCurrentMonth = getStartDateOfMonth();
+  const endDateOfCurrentMonth = getEndDateOfMonth();
+  return FundService.fetch(
+    fromDate ?? startDateOfCurrentMonth,
+    toDate ?? endDateOfCurrentMonth,
+  );
+};
 
 export default function BudgetPage() {
+  const { items, handleFetchData: fetchFundHistory } = useList({
+    fetch: fetchData,
+  });
+
+  useEffect(() => {
+    fetchFundHistory();
+  }, []);
+
   return (
     <Flex direction="column" width="full" height="full">
       <CardBalance />
@@ -42,62 +64,19 @@ export default function BudgetPage() {
       >
         <CardList
           maxHeight={'calc(100vh - 200px)'}
-          data={[
-            1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2,
-            3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3,
-          ]}
-          renderItem={() => (
+          data={items}
+          renderItem={(item: any) => (
             <SpendingCard
               w="full"
-              id="1"
-              type="income"
-              datetime={new Date()}
-              title="Mua cầu"
-              note="Mua cầu Vinastar Mua cầu Vinastar Mua cầu Vinastar "
-              amount="240,000đ"
+              id={item.id}
+              type={Number(item.amount) > 0 ? 'income' : 'expense'}
+              datetime={new Date(item.createdDate)}
+              title={item.name}
+              note={item.note}
+              amount={formatNumberWithCommas(item.amount)}
             />
           )}
         />
-        {/* <SpendingCard
-          id="1"
-          type="expense"
-          datetime={new Date()}
-          title="Mua cầu"
-          note="Mua cầu Vinastar Mua cầu Vinastar Mua cầu Vinastar "
-          amount="240,000đ"
-        />
-        <SpendingCard
-          id="1"
-          type="expense"
-          datetime={new Date()}
-          title="Mua cầu"
-          note="Mua cầu Vinastar Mua cầu Vinastar Mua cầu Vinastar "
-          amount="240,000đ"
-        />
-        <SpendingCard
-          id="1"
-          type="expense"
-          datetime={new Date()}
-          title="Mua cầu"
-          note="Mua cầu Vinastar Mua cầu Vinastar Mua cầu Vinastar "
-          amount="240,000đ"
-        />
-        <SpendingCard
-          id="1"
-          type="expense"
-          datetime={new Date()}
-          title="Mua cầu"
-          note="Mua cầu Vinastar Mua cầu Vinastar Mua cầu Vinastar "
-          amount="240,000đ"
-        />
-        <SpendingCard
-          id="1"
-          type="expense"
-          datetime={new Date()}
-          title="Mua cầu"
-          note="Mua cầu Vinastar Mua cầu Vinastar Mua cầu Vinastar "
-          amount="240,000đ"
-        /> */}
       </Box>
     </Flex>
   );

@@ -1,4 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  BaseEntity,
+  CreateDateColumn,
+} from 'typeorm';
 
 @Entity()
 export class FundHistory extends BaseEntity {
@@ -11,7 +17,7 @@ export class FundHistory extends BaseEntity {
   @Column({
     type: 'decimal',
     precision: 12,
-    scale: 2,
+    scale: 0,
     default: 0,
   })
   amount: number;
@@ -19,7 +25,7 @@ export class FundHistory extends BaseEntity {
   @Column()
   note: string;
 
-  @Column({ name: 'created_date' })
+  @CreateDateColumn({ name: 'created_date', type: 'timestamp' })
   createdDate: Date;
 
   @Column({ name: 'created_by' })

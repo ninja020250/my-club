@@ -131,7 +131,7 @@ const SpendingCard = ({
             </HStack>
             {type && (
               <Text fontWeight="semibold" color={colors[type]}>
-                {type == 'expense' ? `-${amount}` : `+${amount}`}
+                {type == 'expense' ? amount : `+${amount}`}
               </Text>
             )}
           </VStack>
