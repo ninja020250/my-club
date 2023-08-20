@@ -2,16 +2,22 @@ import { useTheme } from '@chakra-ui/react';
 import {
   Home,
   Menu,
+  Trash,
+  Edit,
+  Add,
   HambergerMenu,
   Game,
   ArrowRight2,
   ArrowLeft2,
   ProfileCircle,
   Category2,
+  MoneyRecive,
+  MoneySend,
+  WalletMoney,
 } from 'iconsax-react';
 import { Suspense } from 'react';
 
-const MyIcon = ({
+const MyIcons = ({
   size = 32,
   color,
   name = '',
@@ -53,6 +59,18 @@ const MyIcon = ({
       <Category2 size={size} color={_color} variant={variant} {...rest} />
     ),
     home: <Home size={size} color={_color} variant={variant} {...rest} />,
+    moneyRecive: (
+      <MoneyRecive size={size} color={_color} variant={variant} {...rest} />
+    ),
+    moneySend: (
+      <MoneySend size={size} color={_color} variant={variant} {...rest} />
+    ),
+    trash: <Trash size={size} color={_color} variant={variant} {...rest} />,
+    edit: <Edit size={size} color={_color} variant={variant} {...rest} />,
+    add: <Add size={size} color={_color} variant={variant} {...rest} />,
+    walletMoney: (
+      <WalletMoney size={size} color={_color} variant={variant} {...rest} />
+    ),
   };
   return (
     <>
@@ -63,4 +81,4 @@ const MyIcon = ({
   );
 };
 
-export default MyIcon;
+export default MyIcons;

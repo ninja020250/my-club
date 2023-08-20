@@ -29,7 +29,7 @@ const NavItem = ({ icon, label, expanded, selected, ...rest }: any) => {
         transition="background 0.3s ease"
         {...rest}
       >
-        {icon && <Icon fontSize="24" as={icon} />}
+        {icon && <Icon fontSize="18px" as={icon} />}
         <Collapse in={expanded} animateOpacity>
           <Text ml={4} whiteSpace="nowrap">
             {t(label)}

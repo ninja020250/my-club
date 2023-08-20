@@ -1,7 +1,7 @@
 import { useSideBar } from '@/hooks/useSidebar';
 import { Avatar, Box, Flex, HStack, IconButton, Text } from '@chakra-ui/react';
 import { useResponsive } from 'ahooks';
-import MyIcon from '../MyIcons';
+import MyIcons from '../MyIcons';
 
 export default function Navbars() {
   const { md } = useResponsive();
@@ -32,7 +32,7 @@ export default function Navbars() {
                 variant="ghost"
                 onClick={open}
                 aria-label="sidebar toggle"
-                icon={<MyIcon name="hambergerMenu" />}
+                icon={<MyIcons name="hambergerMenu" />}
               />
             )}
           </HStack>

@@ -11,7 +11,7 @@ export const MobileSideBar = ({
   onSelectedItem,
 }: any) => {
   return (
-    <Drawer placement="left" onClose={onClose} isOpen={expanded}>
+    <Drawer placement="right" onClose={onClose} isOpen={expanded}>
       <DrawerOverlay />
       <DrawerContent>
         <SidebarContent

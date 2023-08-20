@@ -11,7 +11,7 @@ function MainLayout() {
     <>
       <HStack align="start" gap={0}>
         <ResponsiveSidebar appVersion={config.appVersion} />
-        <VStack alignItems="start" w="full" height="100vh">
+        <VStack alignItems="start" w="full" height="100vh" bg="gray.50">
           <Navbars />
           <Outlet />
         </VStack>

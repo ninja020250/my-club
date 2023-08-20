@@ -46,8 +46,6 @@ function App() {
         })}
     </Routes>
   );
-
-  // <AuthenticationPage />;
 }
 
 export default App;

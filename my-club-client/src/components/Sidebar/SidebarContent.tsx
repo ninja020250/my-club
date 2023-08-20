@@ -7,7 +7,7 @@ import {
   Text,
   useColorModeValue,
 } from '@chakra-ui/react';
-import MyIcon from '../MyIcons';
+import MyIcons from '../MyIcons';
 import NavItem from './NavItem';
 
 const SidebarContent = ({
@@ -18,12 +18,12 @@ const SidebarContent = ({
   onSelectItem,
 }: any) => {
   const collapseIcon = isMobile ? (
-    <MyIcon name="arrowLeft2" />
+    <MyIcons name="arrowRight2" />
   ) : (
-    <MyIcon name="hambergerMenu" />
+    <MyIcons name="hambergerMenu" />
   );
 
-  const toggleIcon = expanded ? collapseIcon : <MyIcon name="arrowRight2" />;
+  const toggleIcon = expanded ? collapseIcon : <MyIcons name="arrowRight2" />;
 
   return (
     <Box bg={useColorModeValue('white', 'grey.900')} h="full">

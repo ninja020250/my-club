@@ -3,7 +3,7 @@ import { useSideBar } from '@/hooks/useSidebar';
 import { Box, HStack, Text, VStack, useTheme } from '@chakra-ui/react';
 import { useResponsive } from 'ahooks';
 import { useTranslation } from 'react-i18next';
-import MyIcon from '../MyIcons';
+import MyIcons from '../MyIcons';
 
 export const MenuItem = ({ label, icon, onClick, isSelected }: any) => {
   return (
@@ -31,6 +31,11 @@ const menuItems = [
     label: 'menu.title.game',
   },
   {
+    iconName: 'walletMoney',
+    key: ROUTE_PATHS.BUDGET,
+    label: 'menu.title.budget',
+  },
+  {
     iconName: 'profileCircle',
     key: ROUTE_PATHS.PROFILE,
     label: 'menu.title.profile',
@@ -51,7 +56,7 @@ export default function MobileBottomBar() {
       bottom="0"
       boxShadow="2xl"
       py="3"
-      px="8"
+      px="4"
       borderTopRadius="2xl"
       bg="white"
     >
@@ -65,7 +70,8 @@ export default function MobileBottomBar() {
               onClick={() => selectItem(item)}
               label={t(item.label)}
               icon={
-                <MyIcon
+                <MyIcons
+                  size="24px"
                   variant={isSelected ? 'Bold' : 'Outline'}
                   name={item.iconName}
                   color={isSelected ? colors.teal[500] : colors.gray[600]}

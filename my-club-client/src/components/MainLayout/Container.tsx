@@ -17,8 +17,8 @@ function Container({ children }: any) {
         w="full"
         height="full"
         bg="white"
-        boxShadow="lg"
-        borderRadius="2xl"
+        boxShadow="dark-lg"
+        borderRadius="lg"
       >
         {children}
       </Box>
