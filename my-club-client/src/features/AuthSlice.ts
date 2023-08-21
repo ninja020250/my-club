@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { ROUTE_PATHS } from '@/config/route.config';
 import AuthService from '@/services/AuthService';
 import { RootState } from '@/store';
 import CookieService, { COOKIE_KEYS } from '@/utils/cookie';
@@ -15,6 +16,19 @@ const initialState: AuthState = {
   profile: null,
   isLoggedIn: false,
 };
+
+export const checkToken = createAsyncThunk(
+  'auth/checkAuthentication',
+  async (_, thunkAPI) => {
+    const access_token = CookieService.get(COOKIE_KEYS.ACCESS_TOKEN);
+    if (access_token) {
+      const jwtPayload = AuthService.parseJwt(access_token);
+      thunkAPI.dispatch(loginSuccess(jwtPayload));
+    } else {
+      thunkAPI.dispatch(logoutSuccess());
+    }
+  },
+);
 
 export const loginAsync = createAsyncThunk(
   'auth/login',
@@ -33,6 +47,11 @@ export const loginAsync = createAsyncThunk(
   },
 );
 
+export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
+  CookieService.removeAll(undefined, '/');
+  thunkAPI.dispatch(logoutSuccess());
+});
+
 export const authSlice = createSlice({
   name: 'counter',
   initialState,
@@ -44,6 +63,7 @@ export const authSlice = createSlice({
     logoutSuccess: (state) => {
       state.profile = null;
       state.isLoggedIn = false;
+      window.location.href = ROUTE_PATHS.LOGIN;
     },
   },
   extraReducers: (builder) => {
@@ -60,7 +80,7 @@ export const authSlice = createSlice({
   },
 });
 
-export const { loginSuccess } = authSlice.actions;
+export const { loginSuccess, logoutSuccess } = authSlice.actions;
 export const selectAuthProfile = (state: RootState) => state.auth.profile;
 export const selectAuthStatus = (state: RootState) => state.auth.isLoggedIn;
 

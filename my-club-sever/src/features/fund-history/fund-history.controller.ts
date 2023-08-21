@@ -29,12 +29,14 @@ export class FundHistoryController {
     return res.generatedMaps[0];
   }
 
-  @Post('/find-all')
+  @Get()
   // @UseGuards(AuthGuard)
   findAll(
-    @Body() findAllFundHistoryDto: FindAllFundHistoryDto, // @Query('fromDate') fromDate: string, // @Query('toDate') toDate: string,
+    @Query('fromDate') fromDate: string,
+    @Query('toDate') toDate: string,
+    // @Body() findAllFundHistoryDto: FindAllFundHistoryDto, // @Query('fromDate') fromDate: string, // @Query('toDate') toDate: string,
   ) {
-    return this.fundHistoryService.findAll(findAllFundHistoryDto);
+    return this.fundHistoryService.findAll({ fromDate, toDate });
   }
 
   @Get(':id')

@@ -11,7 +11,12 @@ class FundService extends Request {
     toDate: string,
   ): Promise<APIResponse.ILoginResponse> => {
     return this.instance
-      .post('/find-all', { fromDate, toDate })
+      .get('/', {
+        params: {
+          fromDate: decodeURIComponent(fromDate),
+          toDate: decodeURIComponent(toDate),
+        },
+      })
       .then(({ data }: any) => data)
       .catch((e: any) => {
         console.log(e);

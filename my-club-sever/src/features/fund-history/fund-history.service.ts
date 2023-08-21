@@ -43,12 +43,60 @@ export class FundHistoryService {
     }
   }
 
-  findAll({ fromDate, toDate }: { fromDate: string; toDate: string }) {
-    return this.fundHistoryRepository.find({
-      where: {
-        createdDate: Between(new Date(fromDate), new Date(toDate)),
-      },
-    });
+  findAll({
+    fromDate,
+    toDate,
+    page = 1,
+    perPage = 10,
+  }: {
+    fromDate: string;
+    toDate: string;
+    page?: number;
+    perPage?: number;
+  }) {
+    const offset = (page - 1) * perPage;
+    return this.fundHistoryRepository.query(
+      `
+      WITH paginated_transactions AS ( SELECT SUM(amount) OVER () AS total, 
+          id,
+          name,
+          amount,
+          note,
+          created_date as "createdDate",
+          created_by as "createdBy",
+          club_id as "clubId"
+        FROM fund_history
+        ORDER BY created_date DESC
+        FETCH FIRST $1 ROWS ONLY
+        OFFSET $2
+    )
+    
+      SELECT
+      pt.*,
+      (SELECT SUM(amount) FROM fund_history WHERE created_date BETWEEN $3 AND $4) AS balance
+      FROM paginated_transactions pt;
+    `,
+      [perPage, offset, fromDate, toDate],
+    );
+    // return this.fundHistoryRepository
+    //   .createQueryBuilder('fund_history')
+    //   .orderBy('fund_history.created_date', 'ASC')
+    //   .select([
+    //     'fund_history.id',
+    //     'fund_history.name',
+    //     'fund_history.amount',
+    //     'fund_history.note',
+    //     'fund_history.created_date AS "createdDate"',
+    //     'fund_history.created_by',
+    //     'fund_history.club_id',
+    //   ])
+    //   .where('fund_history.created_date BETWEEN :fromDate AND :toDate', {
+    //     fromDate,
+    //     toDate,
+    //   })
+    //   .skip(offset)
+    //   .take(perPage)
+    //   .getManyAndCount();
   }
 
   findOne(id: string) {

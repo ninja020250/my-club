@@ -1,7 +1,5 @@
-import MainLayout from '@/components/MainLayout';
-
 function GamePlayPage(props: any) {
-  return <MainLayout.Container>GamePlayPage</MainLayout.Container>;
+  return <div>GamePlayPage</div>;
 }
 
 GamePlayPage.propTypes = {};

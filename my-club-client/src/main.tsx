@@ -14,17 +14,15 @@ import defaultTheme from './themes/default.ts';
 configResponsive(breakpoints);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <ReduxProvider store={store}>
-      <HelmetProvider>
-        <BrowserRouter>
-          <ChakraProvider theme={defaultTheme}>
-            <SideBarContextProvider>
-              <App />
-            </SideBarContextProvider>
-          </ChakraProvider>
-        </BrowserRouter>
-      </HelmetProvider>
-    </ReduxProvider>
-  </React.StrictMode>,
+  <ReduxProvider store={store}>
+    <HelmetProvider>
+      <BrowserRouter>
+        <ChakraProvider theme={defaultTheme}>
+          <SideBarContextProvider>
+            <App />
+          </SideBarContextProvider>
+        </ChakraProvider>
+      </BrowserRouter>
+    </HelmetProvider>
+  </ReduxProvider>,
 );

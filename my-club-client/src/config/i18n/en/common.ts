@@ -1,4 +1,5 @@
 export default {
+  'common.month': 'Tháng {{value}}',
   'is-required': 'Vui lòng nhập {{value}}',
   'menu.title.dashboard': 'Trang chủ',
   'menu.title.home': 'Trang chủ',

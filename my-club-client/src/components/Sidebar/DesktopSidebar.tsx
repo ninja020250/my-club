@@ -1,6 +1,13 @@
-import { Box, useColorModeValue } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Collapse,
+  Stack,
+  useColorModeValue,
+} from '@chakra-ui/react';
 import AppVersionTag from './AppVersionTag';
 import SidebarContent from './SidebarContent';
+import { useTranslation } from 'react-i18next';
 
 export default function DesktopSidebar({
   expanded,
@@ -9,7 +16,9 @@ export default function DesktopSidebar({
   onSelectedItem,
   useExpandedValue,
   appVersion = '',
+  onClickLogout,
 }: any) {
+  const { t } = useTranslation();
   return (
     <Box
       borderTopLeftRadius="2xl"
@@ -27,7 +36,22 @@ export default function DesktopSidebar({
         onToggle={onToggle}
         onSelectItem={onSelectedItem}
       />
-      <AppVersionTag show={expanded} appVersion={appVersion} />
+      <Collapse in={expanded} animateOpacity>
+        <Stack
+          direction="column"
+          align="center"
+          justify="center"
+          p="6"
+          w="full"
+          position="absolute"
+          bottom="0"
+        >
+          <Button variant="link" fontWeight="normal" onClick={onClickLogout}>
+            {t('auth.logout')}
+          </Button>
+          <AppVersionTag show={expanded} appVersion={appVersion} />
+        </Stack>
+      </Collapse>
     </Box>
   );
 }
